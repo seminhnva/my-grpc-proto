@@ -10,6 +10,10 @@ message CurrentBalanceRequest {
 }
 
 message CurrrentBalanceResponse{
-  double           amount      = 1;
-  google.type.Date current_date = 2 [json_name="current_date"];
+  string           account_number  = 1 [json_name ="account_number"];
+  string           account_name    = 2 [json_name ="account_name"];
+  string           currency        = 3;
+  double           current_balance = 4;
+  google.type.Date created_at    = 5 [json_name="created_at"];
+  google.type.Date updated_at    = 6 [json_name="updated_at"];
 }
