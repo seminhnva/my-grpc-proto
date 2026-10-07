@@ -133,10 +133,18 @@ definitions:
   bankCurrrentBalanceResponse:
     type: object
     properties:
-      amount:
+      account_number:
+        type: string
+      account_name:
+        type: string
+      currency:
+        type: string
+      currentBalance:
         type: number
         format: double
-      current_date:
+      created_at:
+        $ref: '#/definitions/typeDate'
+      updated_at:
         $ref: '#/definitions/typeDate'
   helloHelloRequest:
     type: object

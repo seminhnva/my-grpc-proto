@@ -67,11 +67,15 @@ func (x *CurrentBalanceRequest) GetAccountNumber() string {
 }
 
 type CurrrentBalanceResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Amount        float64                `protobuf:"fixed64,1,opt,name=amount,proto3" json:"amount,omitempty"`
-	CurrentDate   *date.Date             `protobuf:"bytes,2,opt,name=current_date,proto3" json:"current_date,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	AccountNumber  string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
+	AccountName    string                 `protobuf:"bytes,2,opt,name=account_name,proto3" json:"account_name,omitempty"`
+	Currency       string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	CurrentBalance float64                `protobuf:"fixed64,4,opt,name=current_balance,json=currentBalance,proto3" json:"current_balance,omitempty"`
+	CreatedAt      *date.Date             `protobuf:"bytes,5,opt,name=created_at,proto3" json:"created_at,omitempty"`
+	UpdatedAt      *date.Date             `protobuf:"bytes,6,opt,name=updated_at,proto3" json:"updated_at,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CurrrentBalanceResponse) Reset() {
@@ -104,16 +108,44 @@ func (*CurrrentBalanceResponse) Descriptor() ([]byte, []int) {
 	return file_proto_bank_type_account_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CurrrentBalanceResponse) GetAmount() float64 {
+func (x *CurrrentBalanceResponse) GetAccountNumber() string {
 	if x != nil {
-		return x.Amount
+		return x.AccountNumber
+	}
+	return ""
+}
+
+func (x *CurrrentBalanceResponse) GetAccountName() string {
+	if x != nil {
+		return x.AccountName
+	}
+	return ""
+}
+
+func (x *CurrrentBalanceResponse) GetCurrency() string {
+	if x != nil {
+		return x.Currency
+	}
+	return ""
+}
+
+func (x *CurrrentBalanceResponse) GetCurrentBalance() float64 {
+	if x != nil {
+		return x.CurrentBalance
 	}
 	return 0
 }
 
-func (x *CurrrentBalanceResponse) GetCurrentDate() *date.Date {
+func (x *CurrrentBalanceResponse) GetCreatedAt() *date.Date {
 	if x != nil {
-		return x.CurrentDate
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *CurrrentBalanceResponse) GetUpdatedAt() *date.Date {
+	if x != nil {
+		return x.UpdatedAt
 	}
 	return nil
 }
@@ -124,10 +156,18 @@ const file_proto_bank_type_account_proto_rawDesc = "" +
 	"\n" +
 	"\x1dproto/bank/type/account.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\"?\n" +
 	"\x15CurrentBalanceRequest\x12&\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"h\n" +
-	"\x17CurrrentBalanceResponse\x12\x16\n" +
-	"\x06amount\x18\x01 \x01(\x01R\x06amount\x125\n" +
-	"\fcurrent_date\x18\x02 \x01(\v2\x11.google.type.DateR\fcurrent_dateB5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"\x90\x02\n" +
+	"\x17CurrrentBalanceResponse\x12&\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x12\"\n" +
+	"\faccount_name\x18\x02 \x01(\tR\faccount_name\x12\x1a\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12'\n" +
+	"\x0fcurrent_balance\x18\x04 \x01(\x01R\x0ecurrentBalance\x121\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x11.google.type.DateR\n" +
+	"created_at\x121\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\v2\x11.google.type.DateR\n" +
+	"updated_atB5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
 
 var (
 	file_proto_bank_type_account_proto_rawDescOnce sync.Once
@@ -148,12 +188,13 @@ var file_proto_bank_type_account_proto_goTypes = []any{
 	(*date.Date)(nil),               // 2: google.type.Date
 }
 var file_proto_bank_type_account_proto_depIdxs = []int32{
-	2, // 0: bank.CurrrentBalanceResponse.current_date:type_name -> google.type.Date
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 0: bank.CurrrentBalanceResponse.created_at:type_name -> google.type.Date
+	2, // 1: bank.CurrrentBalanceResponse.updated_at:type_name -> google.type.Date
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_proto_bank_type_account_proto_init() }
