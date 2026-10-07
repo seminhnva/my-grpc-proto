@@ -10,6 +10,7 @@ import (
 	date "google.golang.org/genproto/googleapis/type/date"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -150,11 +151,131 @@ func (x *CurrrentBalanceResponse) GetUpdatedAt() *date.Date {
 	return nil
 }
 
+type ExchangeRateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	FromCurrency  string                 `protobuf:"bytes,1,opt,name=from_currency,proto3" json:"from_currency,omitempty"`
+	ToCurrency    string                 `protobuf:"bytes,2,opt,name=to_currency,proto3" json:"to_currency,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExchangeRateRequest) Reset() {
+	*x = ExchangeRateRequest{}
+	mi := &file_proto_bank_type_account_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExchangeRateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExchangeRateRequest) ProtoMessage() {}
+
+func (x *ExchangeRateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_bank_type_account_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExchangeRateRequest.ProtoReflect.Descriptor instead.
+func (*ExchangeRateRequest) Descriptor() ([]byte, []int) {
+	return file_proto_bank_type_account_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ExchangeRateRequest) GetFromCurrency() string {
+	if x != nil {
+		return x.FromCurrency
+	}
+	return ""
+}
+
+func (x *ExchangeRateRequest) GetToCurrency() string {
+	if x != nil {
+		return x.ToCurrency
+	}
+	return ""
+}
+
+type ExchangeRateResponse struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	FromCurrency         string                 `protobuf:"bytes,1,opt,name=from_currency,proto3" json:"from_currency,omitempty"`
+	ToCurrency           string                 `protobuf:"bytes,2,opt,name=to_currency,proto3" json:"to_currency,omitempty"`
+	Rate                 float64                `protobuf:"fixed64,3,opt,name=rate,proto3" json:"rate,omitempty"`
+	TransactionTimestamp *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=transaction_timestamp,proto3" json:"transaction_timestamp,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *ExchangeRateResponse) Reset() {
+	*x = ExchangeRateResponse{}
+	mi := &file_proto_bank_type_account_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExchangeRateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExchangeRateResponse) ProtoMessage() {}
+
+func (x *ExchangeRateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_bank_type_account_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExchangeRateResponse.ProtoReflect.Descriptor instead.
+func (*ExchangeRateResponse) Descriptor() ([]byte, []int) {
+	return file_proto_bank_type_account_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ExchangeRateResponse) GetFromCurrency() string {
+	if x != nil {
+		return x.FromCurrency
+	}
+	return ""
+}
+
+func (x *ExchangeRateResponse) GetToCurrency() string {
+	if x != nil {
+		return x.ToCurrency
+	}
+	return ""
+}
+
+func (x *ExchangeRateResponse) GetRate() float64 {
+	if x != nil {
+		return x.Rate
+	}
+	return 0
+}
+
+func (x *ExchangeRateResponse) GetTransactionTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.TransactionTimestamp
+	}
+	return nil
+}
+
 var File_proto_bank_type_account_proto protoreflect.FileDescriptor
 
 const file_proto_bank_type_account_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/bank/type/account.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\"?\n" +
+	"\x1dproto/bank/type/account.proto\x12\x04bank\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cproto/google/type/date.proto\"?\n" +
 	"\x15CurrentBalanceRequest\x12&\n" +
 	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"\x90\x02\n" +
 	"\x17CurrrentBalanceResponse\x12&\n" +
@@ -167,7 +288,15 @@ const file_proto_bank_type_account_proto_rawDesc = "" +
 	"created_at\x121\n" +
 	"\n" +
 	"updated_at\x18\x06 \x01(\v2\x11.google.type.DateR\n" +
-	"updated_atB5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
+	"updated_at\"]\n" +
+	"\x13ExchangeRateRequest\x12$\n" +
+	"\rfrom_currency\x18\x01 \x01(\tR\rfrom_currency\x12 \n" +
+	"\vto_currency\x18\x02 \x01(\tR\vto_currency\"\xc4\x01\n" +
+	"\x14ExchangeRateResponse\x12$\n" +
+	"\rfrom_currency\x18\x01 \x01(\tR\rfrom_currency\x12 \n" +
+	"\vto_currency\x18\x02 \x01(\tR\vto_currency\x12\x12\n" +
+	"\x04rate\x18\x03 \x01(\x01R\x04rate\x12P\n" +
+	"\x15transaction_timestamp\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x15transaction_timestampB5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
 
 var (
 	file_proto_bank_type_account_proto_rawDescOnce sync.Once
@@ -181,20 +310,24 @@ func file_proto_bank_type_account_proto_rawDescGZIP() []byte {
 	return file_proto_bank_type_account_proto_rawDescData
 }
 
-var file_proto_bank_type_account_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_bank_type_account_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_proto_bank_type_account_proto_goTypes = []any{
 	(*CurrentBalanceRequest)(nil),   // 0: bank.CurrentBalanceRequest
 	(*CurrrentBalanceResponse)(nil), // 1: bank.CurrrentBalanceResponse
-	(*date.Date)(nil),               // 2: google.type.Date
+	(*ExchangeRateRequest)(nil),     // 2: bank.ExchangeRateRequest
+	(*ExchangeRateResponse)(nil),    // 3: bank.ExchangeRateResponse
+	(*date.Date)(nil),               // 4: google.type.Date
+	(*timestamppb.Timestamp)(nil),   // 5: google.protobuf.Timestamp
 }
 var file_proto_bank_type_account_proto_depIdxs = []int32{
-	2, // 0: bank.CurrrentBalanceResponse.created_at:type_name -> google.type.Date
-	2, // 1: bank.CurrrentBalanceResponse.updated_at:type_name -> google.type.Date
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: bank.CurrrentBalanceResponse.created_at:type_name -> google.type.Date
+	4, // 1: bank.CurrrentBalanceResponse.updated_at:type_name -> google.type.Date
+	5, // 2: bank.ExchangeRateResponse.transaction_timestamp:type_name -> google.protobuf.Timestamp
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_bank_type_account_proto_init() }
@@ -208,7 +341,7 @@ func file_proto_bank_type_account_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_bank_type_account_proto_rawDesc), len(file_proto_bank_type_account_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
