@@ -16,7 +16,7 @@ enum TransactionType{
 message Transaction {
   string               account_number   = 1 [json_name ="account_number"];
   TransactionType      type = 2 [json_name ="transaction_type"];
-  string               amount           = 3;
+  double               amount           = 3;
   google.type.DateTime timestamp        = 4;
   string               notes            = 5;
 }
