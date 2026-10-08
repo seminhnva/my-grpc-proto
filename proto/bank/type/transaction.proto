@@ -2,11 +2,9 @@ syntax = "proto3";
 
 package bank;
 
-import "google/protobuf/timestamp.proto";
-
-import "google/type/datetime.proto";
-
 import "proto/google/type/date.proto";
+import "proto/google/type/datetime.proto";
+
 
 message Transaction {
   string               account_number   = 1 [json_name ="account_number"];
