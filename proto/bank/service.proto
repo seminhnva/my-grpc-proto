@@ -3,10 +3,14 @@ syntax = "proto3";
 package bank;
 
 import "proto/bank/type/account.proto";
+import "proto/bank/type/transaction.proto";
 option go_package = "github.com/seminhnva/my-grpc-proto/protogen/go/bank";
 
 service BankService{
-  rpc GetCurrentBalance(CurrentBalanceRequest) 
+  rpc GetCurrentBalance(CurrentBalanceRequest)
   returns (CurrrentBalanceResponse);
-  rpc FetchExchangeRates(ExchangeRateRequest) returns (stream ExchangeRateResponse);
+  rpc FetchExchangeRates(ExchangeRateRequest)
+  returns (stream ExchangeRateResponse);
+  rpc SummarizeTransactions(stream Transaction) 
+  returns (TransactionSummary);
 }
