@@ -23,15 +23,64 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type TransactionType int32
+
+const (
+	TransactionType_TRANSACTION_TYPE_UNSPECIFIED TransactionType = 0
+	TransactionType_TRANSACTION_TYPE_IN          TransactionType = 1
+	TransactionType_TRANSACTION_TYPE_OUT         TransactionType = 2
+)
+
+// Enum value maps for TransactionType.
+var (
+	TransactionType_name = map[int32]string{
+		0: "TRANSACTION_TYPE_UNSPECIFIED",
+		1: "TRANSACTION_TYPE_IN",
+		2: "TRANSACTION_TYPE_OUT",
+	}
+	TransactionType_value = map[string]int32{
+		"TRANSACTION_TYPE_UNSPECIFIED": 0,
+		"TRANSACTION_TYPE_IN":          1,
+		"TRANSACTION_TYPE_OUT":         2,
+	}
+)
+
+func (x TransactionType) Enum() *TransactionType {
+	p := new(TransactionType)
+	*p = x
+	return p
+}
+
+func (x TransactionType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TransactionType) Descriptor() protoreflect.EnumDescriptor {
+	return file_proto_bank_type_transaction_proto_enumTypes[0].Descriptor()
+}
+
+func (TransactionType) Type() protoreflect.EnumType {
+	return &file_proto_bank_type_transaction_proto_enumTypes[0]
+}
+
+func (x TransactionType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TransactionType.Descriptor instead.
+func (TransactionType) EnumDescriptor() ([]byte, []int) {
+	return file_proto_bank_type_transaction_proto_rawDescGZIP(), []int{0}
+}
+
 type Transaction struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	AccountNumber   string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
-	TransactionType string                 `protobuf:"bytes,2,opt,name=transaction_type,proto3" json:"transaction_type,omitempty"`
-	Amount          string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
-	Timestamp       *datetime.DateTime     `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Notes           string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccountNumber string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
+	Type          TransactionType        `protobuf:"varint,2,opt,name=type,json=transaction_type,proto3,enum=bank.TransactionType" json:"type,omitempty"`
+	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Timestamp     *datetime.DateTime     `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Notes         string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Transaction) Reset() {
@@ -71,11 +120,11 @@ func (x *Transaction) GetAccountNumber() string {
 	return ""
 }
 
-func (x *Transaction) GetTransactionType() string {
+func (x *Transaction) GetType() TransactionType {
 	if x != nil {
-		return x.TransactionType
+		return x.Type
 	}
-	return ""
+	return TransactionType_TRANSACTION_TYPE_UNSPECIFIED
 }
 
 func (x *Transaction) GetAmount() string {
@@ -179,10 +228,10 @@ var File_proto_bank_type_transaction_proto protoreflect.FileDescriptor
 
 const file_proto_bank_type_transaction_proto_rawDesc = "" +
 	"\n" +
-	"!proto/bank/type/transaction.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\x1a proto/google/type/datetime.proto\"\xc4\x01\n" +
+	"!proto/bank/type/transaction.proto\x12\x04bank\x1a\x1cproto/google/type/date.proto\x1a proto/google/type/datetime.proto\"\xcf\x01\n" +
 	"\vTransaction\x12&\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x12*\n" +
-	"\x10transaction_type\x18\x02 \x01(\tR\x10transaction_type\x12\x16\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x125\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x15.bank.TransactionTypeR\x10transaction_type\x12\x16\n" +
 	"\x06amount\x18\x03 \x01(\tR\x06amount\x123\n" +
 	"\ttimestamp\x18\x04 \x01(\v2\x15.google.type.DateTimeR\ttimestamp\x12\x14\n" +
 	"\x05notes\x18\x05 \x01(\tR\x05notes\"\xe7\x01\n" +
@@ -191,7 +240,11 @@ const file_proto_bank_type_transaction_proto_rawDesc = "" +
 	"\rsum_amount_in\x18\x02 \x01(\x01R\rsum_amount_in\x12&\n" +
 	"\x0esum_amount_out\x18\x03 \x01(\x01R\x0esum_amount_out\x12\x1c\n" +
 	"\tsum_total\x18\x04 \x01(\x01R\tsum_total\x12=\n" +
-	"\x10transaction_date\x18\x05 \x01(\v2\x11.google.type.DateR\x10transaction_dateB5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
+	"\x10transaction_date\x18\x05 \x01(\v2\x11.google.type.DateR\x10transaction_date*f\n" +
+	"\x0fTransactionType\x12 \n" +
+	"\x1cTRANSACTION_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13TRANSACTION_TYPE_IN\x10\x01\x12\x18\n" +
+	"\x14TRANSACTION_TYPE_OUT\x10\x02B5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
 
 var (
 	file_proto_bank_type_transaction_proto_rawDescOnce sync.Once
@@ -205,21 +258,24 @@ func file_proto_bank_type_transaction_proto_rawDescGZIP() []byte {
 	return file_proto_bank_type_transaction_proto_rawDescData
 }
 
+var file_proto_bank_type_transaction_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_proto_bank_type_transaction_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_proto_bank_type_transaction_proto_goTypes = []any{
-	(*Transaction)(nil),        // 0: bank.Transaction
-	(*TransactionSummary)(nil), // 1: bank.TransactionSummary
-	(*datetime.DateTime)(nil),  // 2: google.type.DateTime
-	(*date.Date)(nil),          // 3: google.type.Date
+	(TransactionType)(0),       // 0: bank.TransactionType
+	(*Transaction)(nil),        // 1: bank.Transaction
+	(*TransactionSummary)(nil), // 2: bank.TransactionSummary
+	(*datetime.DateTime)(nil),  // 3: google.type.DateTime
+	(*date.Date)(nil),          // 4: google.type.Date
 }
 var file_proto_bank_type_transaction_proto_depIdxs = []int32{
-	2, // 0: bank.Transaction.timestamp:type_name -> google.type.DateTime
-	3, // 1: bank.TransactionSummary.transaction_date:type_name -> google.type.Date
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 0: bank.Transaction.type:type_name -> bank.TransactionType
+	3, // 1: bank.Transaction.timestamp:type_name -> google.type.DateTime
+	4, // 2: bank.TransactionSummary.transaction_date:type_name -> google.type.Date
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_proto_bank_type_transaction_proto_init() }
@@ -232,13 +288,14 @@ func file_proto_bank_type_transaction_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_bank_type_transaction_proto_rawDesc), len(file_proto_bank_type_transaction_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_proto_bank_type_transaction_proto_goTypes,
 		DependencyIndexes: file_proto_bank_type_transaction_proto_depIdxs,
+		EnumInfos:         file_proto_bank_type_transaction_proto_enumTypes,
 		MessageInfos:      file_proto_bank_type_transaction_proto_msgTypes,
 	}.Build()
 	File_proto_bank_type_transaction_proto = out.File

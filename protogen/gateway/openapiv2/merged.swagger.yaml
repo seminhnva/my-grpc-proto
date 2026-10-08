@@ -219,7 +219,7 @@ definitions:
       account_number:
         type: string
       transaction_type:
-        type: string
+        $ref: '#/definitions/bankTransactionType'
       amount:
         type: string
       timestamp:
@@ -242,6 +242,13 @@ definitions:
         format: double
       transaction_date:
         $ref: '#/definitions/typeDate'
+  bankTransactionType:
+    type: string
+    enum:
+      - TRANSACTION_TYPE_UNSPECIFIED
+      - TRANSACTION_TYPE_IN
+      - TRANSACTION_TYPE_OUT
+    default: TRANSACTION_TYPE_UNSPECIFIED
   helloHelloRequest:
     type: object
     properties:
