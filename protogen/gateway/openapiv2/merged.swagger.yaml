@@ -221,7 +221,8 @@ definitions:
       transaction_type:
         $ref: '#/definitions/bankTransactionType'
       amount:
-        type: string
+        type: number
+        format: double
       timestamp:
         $ref: '#/definitions/typeDateTime'
       notes:

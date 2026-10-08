@@ -76,7 +76,7 @@ type Transaction struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountNumber string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
 	Type          TransactionType        `protobuf:"varint,2,opt,name=type,json=transaction_type,proto3,enum=bank.TransactionType" json:"type,omitempty"`
-	Amount        string                 `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Amount        float64                `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
 	Timestamp     *datetime.DateTime     `protobuf:"bytes,4,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	Notes         string                 `protobuf:"bytes,5,opt,name=notes,proto3" json:"notes,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -127,11 +127,11 @@ func (x *Transaction) GetType() TransactionType {
 	return TransactionType_TRANSACTION_TYPE_UNSPECIFIED
 }
 
-func (x *Transaction) GetAmount() string {
+func (x *Transaction) GetAmount() float64 {
 	if x != nil {
 		return x.Amount
 	}
-	return ""
+	return 0
 }
 
 func (x *Transaction) GetTimestamp() *datetime.DateTime {
@@ -232,7 +232,7 @@ const file_proto_bank_type_transaction_proto_rawDesc = "" +
 	"\vTransaction\x12&\n" +
 	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x125\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x15.bank.TransactionTypeR\x10transaction_type\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\tR\x06amount\x123\n" +
+	"\x06amount\x18\x03 \x01(\x01R\x06amount\x123\n" +
 	"\ttimestamp\x18\x04 \x01(\v2\x15.google.type.DateTimeR\ttimestamp\x12\x14\n" +
 	"\x05notes\x18\x05 \x01(\tR\x05notes\"\xe7\x01\n" +
 	"\x12TransactionSummary\x12&\n" +
