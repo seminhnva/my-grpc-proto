@@ -5,6 +5,7 @@ package bank;
 import "proto/google/type/date.proto";
 import "proto/google/type/datetime.proto";
 
+option go_package = "github.com/seminhnva/my-grpc-proto/protogen/go/bank";
 
 message Transaction {
   string               account_number   = 1 [json_name ="account_number"];
