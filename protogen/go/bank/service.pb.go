@@ -24,29 +24,34 @@ var File_proto_bank_service_proto protoreflect.FileDescriptor
 
 const file_proto_bank_service_proto_rawDesc = "" +
 	"\n" +
-	"\x18proto/bank/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto\x1a!proto/bank/type/transaction.proto2\xf5\x01\n" +
+	"\x18proto/bank/service.proto\x12\x04bank\x1a\x1dproto/bank/type/account.proto\x1a!proto/bank/type/transaction.proto\x1a\x1eproto/bank/type/transfer.proto2\xbc\x02\n" +
 	"\vBankService\x12O\n" +
 	"\x11GetCurrentBalance\x12\x1b.bank.CurrentBalanceRequest\x1a\x1d.bank.CurrrentBalanceResponse\x12M\n" +
 	"\x12FetchExchangeRates\x12\x19.bank.ExchangeRateRequest\x1a\x1a.bank.ExchangeRateResponse0\x01\x12F\n" +
-	"\x15SummarizeTransactions\x12\x11.bank.Transaction\x1a\x18.bank.TransactionSummary(\x01B5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
+	"\x15SummarizeTransactions\x12\x11.bank.Transaction\x1a\x18.bank.TransactionSummary(\x01\x12E\n" +
+	"\x10TransferMultiple\x12\x15.bank.TransferRequest\x1a\x16.bank.TransferResponse(\x010\x01B5Z3github.com/seminhnva/my-grpc-proto/protogen/go/bankb\x06proto3"
 
 var file_proto_bank_service_proto_goTypes = []any{
 	(*CurrentBalanceRequest)(nil),   // 0: bank.CurrentBalanceRequest
 	(*ExchangeRateRequest)(nil),     // 1: bank.ExchangeRateRequest
 	(*Transaction)(nil),             // 2: bank.Transaction
-	(*CurrrentBalanceResponse)(nil), // 3: bank.CurrrentBalanceResponse
-	(*ExchangeRateResponse)(nil),    // 4: bank.ExchangeRateResponse
-	(*TransactionSummary)(nil),      // 5: bank.TransactionSummary
+	(*TransferRequest)(nil),         // 3: bank.TransferRequest
+	(*CurrrentBalanceResponse)(nil), // 4: bank.CurrrentBalanceResponse
+	(*ExchangeRateResponse)(nil),    // 5: bank.ExchangeRateResponse
+	(*TransactionSummary)(nil),      // 6: bank.TransactionSummary
+	(*TransferResponse)(nil),        // 7: bank.TransferResponse
 }
 var file_proto_bank_service_proto_depIdxs = []int32{
 	0, // 0: bank.BankService.GetCurrentBalance:input_type -> bank.CurrentBalanceRequest
 	1, // 1: bank.BankService.FetchExchangeRates:input_type -> bank.ExchangeRateRequest
 	2, // 2: bank.BankService.SummarizeTransactions:input_type -> bank.Transaction
-	3, // 3: bank.BankService.GetCurrentBalance:output_type -> bank.CurrrentBalanceResponse
-	4, // 4: bank.BankService.FetchExchangeRates:output_type -> bank.ExchangeRateResponse
-	5, // 5: bank.BankService.SummarizeTransactions:output_type -> bank.TransactionSummary
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	3, // 3: bank.BankService.TransferMultiple:input_type -> bank.TransferRequest
+	4, // 4: bank.BankService.GetCurrentBalance:output_type -> bank.CurrrentBalanceResponse
+	5, // 5: bank.BankService.FetchExchangeRates:output_type -> bank.ExchangeRateResponse
+	6, // 6: bank.BankService.SummarizeTransactions:output_type -> bank.TransactionSummary
+	7, // 7: bank.BankService.TransferMultiple:output_type -> bank.TransferResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -59,6 +64,7 @@ func file_proto_bank_service_proto_init() {
 	}
 	file_proto_bank_type_account_proto_init()
 	file_proto_bank_type_transaction_proto_init()
+	file_proto_bank_type_transfer_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
