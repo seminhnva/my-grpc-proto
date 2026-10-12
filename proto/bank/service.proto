@@ -9,11 +9,17 @@ option go_package = "github.com/seminhnva/my-grpc-proto/protogen/go/bank";
 
 service BankService{
   rpc GetCurrentBalance(CurrentBalanceRequest)
-  returns (CurrrentBalanceResponse);
+  returns (CurrrentBalanceResponse) {};
+
   rpc FetchExchangeRates(ExchangeRateRequest)
-  returns (stream ExchangeRateResponse);
-  rpc SummarizeTransactions(stream Transaction) 
-  returns (TransactionSummary);
-  rpc TransferMultiple(stream TransferRequest) 
-  returns (stream TransferResponse);
+  returns (stream ExchangeRateResponse) {};
+
+  rpc SummarizeTransactions(stream Transaction)
+  returns (TransactionSummary){};
+
+  rpc TransferMultiple(stream TransferRequest)
+  returns (stream TransferResponse) {};
+  
+  rpc CreateAccount( CreateAccountRequest)
+  returns ( CreateAccountResponse) {};
 }
