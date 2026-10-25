@@ -72,7 +72,7 @@ type CurrrentBalanceResponse struct {
 	AccountNumber  string                 `protobuf:"bytes,1,opt,name=account_number,proto3" json:"account_number,omitempty"`
 	AccountName    string                 `protobuf:"bytes,2,opt,name=account_name,proto3" json:"account_name,omitempty"`
 	Currency       string                 `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	CurrentBalance float64                `protobuf:"fixed64,4,opt,name=current_balance,json=currentBalance,proto3" json:"current_balance,omitempty"`
+	CurrentBalance float64                `protobuf:"fixed64,4,opt,name=current_balance,proto3" json:"current_balance,omitempty"`
 	CreatedAt      *date.Date             `protobuf:"bytes,5,opt,name=created_at,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *date.Date             `protobuf:"bytes,6,opt,name=updated_at,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -381,12 +381,12 @@ const file_proto_bank_type_account_proto_rawDesc = "" +
 	"\n" +
 	"\x1dproto/bank/type/account.proto\x12\x04bank\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cproto/google/type/date.proto\"?\n" +
 	"\x15CurrentBalanceRequest\x12&\n" +
-	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"\x90\x02\n" +
+	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\"\x91\x02\n" +
 	"\x17CurrrentBalanceResponse\x12&\n" +
 	"\x0eaccount_number\x18\x01 \x01(\tR\x0eaccount_number\x12\"\n" +
 	"\faccount_name\x18\x02 \x01(\tR\faccount_name\x12\x1a\n" +
-	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12'\n" +
-	"\x0fcurrent_balance\x18\x04 \x01(\x01R\x0ecurrentBalance\x121\n" +
+	"\bcurrency\x18\x03 \x01(\tR\bcurrency\x12(\n" +
+	"\x0fcurrent_balance\x18\x04 \x01(\x01R\x0fcurrent_balance\x121\n" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x11.google.type.DateR\n" +
 	"created_at\x121\n" +
