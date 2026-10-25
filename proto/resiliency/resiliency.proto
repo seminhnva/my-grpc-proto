@@ -80,7 +80,7 @@ service ResilienceWithMetadataService{
   rpc UnaryResiliencyWithMetadata(ResiliencyRequest)
   returns( ResiliencyResponse) {
     option (google.api.http) = {
-      get: "/api/resiliency/v1/metadata/unary"
+      post: "/api/resiliency/v1/metadata/unary"
       body:"*"
     };
   }
@@ -88,7 +88,7 @@ service ResilienceWithMetadataService{
   rpc ServerStreamResiliencyWithMetadata(ResiliencyRequest)
   returns( stream ResiliencyResponse){
     option (google.api.http) = {
-      get: "/api/resiliency/v1/server_streaming"
+      post: "/api/resiliency/v1/server_streaming"
       body:"*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -113,7 +113,7 @@ service ResilienceWithMetadataService{
   rpc ClientStreamResiliencyWithMetadata(stream ResiliencyRequest)
   returns( ResiliencyResponse){
     option (google.api.http) = {
-      get: "/api/resiliency/v1/metadata/client_streaming"
+      post: "/api/resiliency/v1/metadata/client_streaming"
       body:"*" 
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -137,7 +137,7 @@ service ResilienceWithMetadataService{
   rpc BiDirectionResiliencyWithMetadata(stream ResiliencyRequest)
   returns( stream ResiliencyResponse){
     option (google.api.http) = {
-      get: "/api/resiliency/v1/metadata/bidirectional_streaming"
+      post: "/api/resiliency/v1/metadata/bidirectional_streaming"
       body:"*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
