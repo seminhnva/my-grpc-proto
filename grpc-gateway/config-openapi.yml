@@ -23,10 +23,10 @@ openapiOptions:
           "400":
             description: "Returned when given currency pair is not exists"
   message:
-    - message: bank.CurrentBalanceRequest
+    - message: bank.CurrrentBalanceResponse
       option:
         json_schema:
-          description: "Description for CurrentBalanceRequest"
+          description: "Description for CurrrentBalanceResponse"
     - message: bank.CurrentBalanceResponse
       option:
         json_schema:
@@ -36,7 +36,7 @@ openapiOptions:
         json_schema:
           description: "Description for ExchangeRateRequest"
   field:
-    - field: bank.CurrentBalanceRequest.account_number
+    - field: bank.CurrrentBalanceResponse.account_number
       option:
         description: "Account number to get the balance"
     - field: bank.CurrentBalanceResponse.amount
