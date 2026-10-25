@@ -1,17 +1,293 @@
 swagger: "2.0"
 info:
-  title: proto/hello/hello.proto
-  version: version not set
+  title: Protobuf and Grpc
+  version: 1.0.0
 tags:
-  - name: HelloService
-  - name: BankService
   - name: ResilienceService
   - name: ResilienceWithMetadataService
+  - name: HelloService
+  - name: BankService
+host: localhost:8081
+schemes:
+  - http
 consumes:
   - application/json
 produces:
   - application/json
 paths:
+  /api/resiliency/v1/bidirectional_streaming:
+    get:
+      operationId: ResilienceService_BiDirectionResiliency
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: min_delay_second
+          description: Minimum delay in second(inclusive)
+          in: query
+          required: false
+          type: integer
+          format: integer
+          x-example: 2
+        - name: max_delay_second
+          description: Maximum delay in second (inclusive)
+          in: query
+          required: false
+          type: integer
+          format: integer
+          x-example: 7
+        - name: status_codes
+          description: Array of grpc status codes to generated(numeric)
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      tags:
+        - ResilienceService
+  /api/resiliency/v1/client_streaming:
+    get:
+      operationId: ResilienceService_ClientStreamResiliency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: min_delay_second
+          description: Minimum delay in second(inclusive)
+          in: query
+          required: false
+          type: integer
+          format: integer
+          x-example: 2
+        - name: max_delay_second
+          description: Maximum delay in second (inclusive)
+          in: query
+          required: false
+          type: integer
+          format: integer
+          x-example: 7
+        - name: status_codes
+          description: Array of grpc status codes to generated(numeric)
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      tags:
+        - ResilienceService
+  /api/resiliency/v1/metadata/bidirectional_streaming:
+    post:
+      summary: Summary for BiDirectionalResiliencyWithMetadata
+      description: Description for BiDirectionalResiliencyWithMetadata
+      operationId: ResilienceWithMetadataService_BiDirectionResiliencyWithMetadata
+      responses:
+        "200":
+          description: Sample response, 200 when ...
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        "400":
+          description: Sample response, 400 when ..
+          schema: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /api/resiliency/v1/metadata/client_streaming:
+    post:
+      summary: Summary for ClientStreamingResiliencyWithMetadata
+      description: Description for ClientStreamingResiliencyWithMetadata
+      operationId: ResilienceWithMetadataService_ClientStreamResiliencyWithMetadata
+      responses:
+        "200":
+          description: Sample response, 200 when ...
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        "400":
+          description: Sample response, 400 when ..
+          schema: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /api/resiliency/v1/metadata/unary:
+    post:
+      operationId: ResilienceWithMetadataService_UnaryResiliencyWithMetadata
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /api/resiliency/v1/server_streaming:
+    post:
+      summary: Summary for ServerStreamingResiliencyWithMetadata
+      description: Description for ServerStreamingResiliencyWithMetadata
+      operationId: ResilienceWithMetadataService_ServerStreamResiliencyWithMetadata
+      responses:
+        "200":
+          description: Sample response, 200 when ...
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        "400":
+          description: Sample response, 400 when ..
+          schema: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /api/resiliency/v1/server_streaming/{min_delay_second}/{max_delay_second}:
+    get:
+      operationId: ResilienceService_ServerStreamResiliency
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: min_delay_second
+          description: Minimum delay in second(inclusive)
+          in: path
+          required: true
+          type: integer
+          format: int32
+          x-example: 2
+        - name: max_delay_second
+          description: Maximum delay in second (inclusive)
+          in: path
+          required: true
+          type: integer
+          format: int32
+          x-example: 7
+        - name: status_codes
+          description: Array of grpc status codes to generated(numeric)
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      tags:
+        - ResilienceService
+  /api/resiliency/v1/unary:
+    get:
+      operationId: ResilienceService_UnaryResiliency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: min_delay_second
+          description: Minimum delay in second(inclusive)
+          in: query
+          required: false
+          type: integer
+          format: integer
+          x-example: 2
+        - name: max_delay_second
+          description: Maximum delay in second (inclusive)
+          in: query
+          required: false
+          type: integer
+          format: integer
+          x-example: 7
+        - name: status_codes
+          description: Array of grpc status codes to generated(numeric)
+          in: query
+          required: false
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      tags:
+        - ResilienceService
   /bank.BankService/CreateAccount:
     post:
       operationId: BankService_CreateAccount
@@ -220,194 +496,6 @@ paths:
             $ref: '#/definitions/helloHelloRequest'
       tags:
         - HelloService
-  /resiliency.ResilienceService/BiDirectionResiliency:
-    post:
-      operationId: ResilienceService_BiDirectionResiliency
-      responses:
-        "200":
-          description: A successful response.(streaming responses)
-          schema:
-            type: object
-            properties:
-              result:
-                $ref: '#/definitions/resiliencyResiliencyResponse'
-              error:
-                $ref: '#/definitions/rpcStatus'
-            title: Stream result of resiliencyResiliencyResponse
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          description: ' (streaming inputs)'
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceService
-  /resiliency.ResilienceService/ClientStreamResiliency:
-    post:
-      operationId: ResilienceService_ClientStreamResiliency
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyResponse'
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          description: ' (streaming inputs)'
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceService
-  /resiliency.ResilienceService/ServerStreamResiliency:
-    post:
-      operationId: ResilienceService_ServerStreamResiliency
-      responses:
-        "200":
-          description: A successful response.(streaming responses)
-          schema:
-            type: object
-            properties:
-              result:
-                $ref: '#/definitions/resiliencyResiliencyResponse'
-              error:
-                $ref: '#/definitions/rpcStatus'
-            title: Stream result of resiliencyResiliencyResponse
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceService
-  /resiliency.ResilienceService/UnaryResiliency:
-    post:
-      operationId: ResilienceService_UnaryResiliency
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyResponse'
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceService
-  /resiliency.ResilienceWithMetadataService/BiDirectionResiliencyWithMetadata:
-    post:
-      operationId: ResilienceWithMetadataService_BiDirectionResiliencyWithMetadata
-      responses:
-        "200":
-          description: A successful response.(streaming responses)
-          schema:
-            type: object
-            properties:
-              result:
-                $ref: '#/definitions/resiliencyResiliencyResponse'
-              error:
-                $ref: '#/definitions/rpcStatus'
-            title: Stream result of resiliencyResiliencyResponse
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          description: ' (streaming inputs)'
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceWithMetadataService
-  /resiliency.ResilienceWithMetadataService/ClientStreamResiliencyWithMetadata:
-    post:
-      operationId: ResilienceWithMetadataService_ClientStreamResiliencyWithMetadata
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyResponse'
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          description: ' (streaming inputs)'
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceWithMetadataService
-  /resiliency.ResilienceWithMetadataService/ServerStreamResiliencyWithMetadata:
-    post:
-      operationId: ResilienceWithMetadataService_ServerStreamResiliencyWithMetadata
-      responses:
-        "200":
-          description: A successful response.(streaming responses)
-          schema:
-            type: object
-            properties:
-              result:
-                $ref: '#/definitions/resiliencyResiliencyResponse'
-              error:
-                $ref: '#/definitions/rpcStatus'
-            title: Stream result of resiliencyResiliencyResponse
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceWithMetadataService
-  /resiliency.ResilienceWithMetadataService/UnaryResiliencyWithMetadata:
-    post:
-      operationId: ResilienceWithMetadataService_UnaryResiliencyWithMetadata
-      responses:
-        "200":
-          description: A successful response.
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyResponse'
-        default:
-          description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/rpcStatus'
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/resiliencyResiliencyRequest'
-      tags:
-        - ResilienceWithMetadataService
 definitions:
   bankCreateAccountRequest:
     type: object
@@ -561,15 +649,20 @@ definitions:
     properties:
       min_delay_second:
         type: integer
-        format: int32
+        format: integer
+        example: 2
+        description: Minimum delay in second(inclusive)
       max_delay_second:
         type: integer
-        format: int32
+        format: integer
+        example: 7
+        description: Maximum delay in second (inclusive)
       status_codes:
         type: array
         items:
           type: integer
           format: int64
+        description: Array of grpc status codes to generated(numeric)
   resiliencyResiliencyResponse:
     type: object
     properties:
