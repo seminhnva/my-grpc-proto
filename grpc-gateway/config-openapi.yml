@@ -23,29 +23,45 @@ openapiOptions:
           "400":
             description: "Returned when given currency pair is not exists"
   message:
+    - message: bank.CurrentBalanceRequest
+      option:
+        json_schema:
+          description: "Request to retrieve the current balance for an account"
     - message: bank.CurrrentBalanceResponse
       option:
         json_schema:
-          description: "Description for CurrrentBalanceResponse"
-    - message: bank.CurrrentBalanceResponse
-      option:
-        json_schema:
-          description: "Description for CurrrentBalanceResponse"
+          description: "Current balance details for an account"
     - message: bank.ExchangeRateRequest
       option:
         json_schema:
-          description: "Description for ExchangeRateRequest"
+          description: "Currency pair for which to retrieve the exchange rate"
+    - message: bank.ExchangeRateResponse
+      option:
+        json_schema:
+          description: "Exchange rate details for a currency pair"
   field:
+    - field: bank.CurrentBalanceRequest.account_number
+      option:
+        description: "Account number to retrieve the balance for"
     - field: bank.CurrrentBalanceResponse.account_number
       option:
         description: "Account number to get the balance"
+    - field: bank.CurrrentBalanceResponse.account_name
+      option:
+        description: "Account holder name"
+    - field: bank.CurrrentBalanceResponse.currency
+      option:
+        description: "Account currency"
     - field: bank.CurrrentBalanceResponse.current_balance
       option:
         description: "Account's current balance"
         example: "2593"
+    - field: bank.CurrrentBalanceResponse.created_at
+      option:
+        description: "Account creation date"
     - field: bank.CurrrentBalanceResponse.updated_at
       option:
-        description: "Current date"
+        description: "Date the account balance was last updated"
     - field: bank.ExchangeRateRequest.from_currency
       option:
         description: "Exchange rate from currency"
@@ -63,6 +79,6 @@ openapiOptions:
     - field: bank.ExchangeRateResponse.rate
       option:
         description: "Exchange rate at particular timestamp"
-    - field: bank.ExchangeRateResponse.timestamp
+    - field: bank.ExchangeRateResponse.transaction_timestamp
       option:
-        description: "Current timestamp"
+        description: "Timestamp of the exchange rate"
