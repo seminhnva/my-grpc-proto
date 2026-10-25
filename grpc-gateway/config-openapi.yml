@@ -27,10 +27,10 @@ openapiOptions:
       option:
         json_schema:
           description: "Description for CurrrentBalanceResponse"
-    - message: bank.CurrentBalanceResponse
+    - message: bank.CurrrentBalanceResponse
       option:
         json_schema:
-          description: "Description for CurrentBalanceResponse"
+          description: "Description for CurrrentBalanceResponse"
     - message: bank.ExchangeRateRequest
       option:
         json_schema:
@@ -39,11 +39,11 @@ openapiOptions:
     - field: bank.CurrrentBalanceResponse.account_number
       option:
         description: "Account number to get the balance"
-    - field: bank.CurrentBalanceResponse.amount
+    - field: bank.CurrrentBalanceResponse.amount
       option:
         description: "Account's current balance"
         example: "2593"
-    - field: bank.CurrentBalanceResponse.current_date
+    - field: bank.CurrrentBalanceResponse.current_date
       option:
         description: "Current date"
     - field: bank.ExchangeRateRequest.from_currency
