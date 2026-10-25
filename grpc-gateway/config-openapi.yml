@@ -39,11 +39,11 @@ openapiOptions:
     - field: bank.CurrrentBalanceResponse.account_number
       option:
         description: "Account number to get the balance"
-    - field: bank.CurrrentBalanceResponse.amount
+    - field: bank.CurrrentBalanceResponse.current_balance
       option:
         description: "Account's current balance"
         example: "2593"
-    - field: bank.CurrrentBalanceResponse.current_date
+    - field: bank.CurrrentBalanceResponse.updated_at
       option:
         description: "Current date"
     - field: bank.ExchangeRateRequest.from_currency
