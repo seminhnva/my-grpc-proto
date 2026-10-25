@@ -5,6 +5,8 @@ info:
 tags:
   - name: HelloService
   - name: BankService
+  - name: ResilienceService
+  - name: ResilienceWithMetadataService
 consumes:
   - application/json
 produces:
@@ -218,6 +220,194 @@ paths:
             $ref: '#/definitions/helloHelloRequest'
       tags:
         - HelloService
+  /resiliency.ResilienceService/BiDirectionResiliency:
+    post:
+      operationId: ResilienceService_BiDirectionResiliency
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceService
+  /resiliency.ResilienceService/ClientStreamResiliency:
+    post:
+      operationId: ResilienceService_ClientStreamResiliency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceService
+  /resiliency.ResilienceService/ServerStreamResiliency:
+    post:
+      operationId: ResilienceService_ServerStreamResiliency
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceService
+  /resiliency.ResilienceService/UnaryResiliency:
+    post:
+      operationId: ResilienceService_UnaryResiliency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceService
+  /resiliency.ResilienceWithMetadataService/BiDirectionResiliencyWithMetadata:
+    post:
+      operationId: ResilienceWithMetadataService_BiDirectionResiliencyWithMetadata
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /resiliency.ResilienceWithMetadataService/ClientStreamResiliencyWithMetadata:
+    post:
+      operationId: ResilienceWithMetadataService_ClientStreamResiliencyWithMetadata
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          description: ' (streaming inputs)'
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /resiliency.ResilienceWithMetadataService/ServerStreamResiliencyWithMetadata:
+    post:
+      operationId: ResilienceWithMetadataService_ServerStreamResiliencyWithMetadata
+      responses:
+        "200":
+          description: A successful response.(streaming responses)
+          schema:
+            type: object
+            properties:
+              result:
+                $ref: '#/definitions/resiliencyResiliencyResponse'
+              error:
+                $ref: '#/definitions/rpcStatus'
+            title: Stream result of resiliencyResiliencyResponse
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
+  /resiliency.ResilienceWithMetadataService/UnaryResiliencyWithMetadata:
+    post:
+      operationId: ResilienceWithMetadataService_UnaryResiliencyWithMetadata
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/resiliencyResiliencyRequest'
+      tags:
+        - ResilienceWithMetadataService
 definitions:
   bankCreateAccountRequest:
     type: object
@@ -366,6 +556,25 @@ definitions:
       '@type':
         type: string
     additionalProperties: true
+  resiliencyResiliencyRequest:
+    type: object
+    properties:
+      min_delay_second:
+        type: integer
+        format: int32
+      max_delay_second:
+        type: integer
+        format: int32
+      status_codes:
+        type: array
+        items:
+          type: integer
+          format: int64
+  resiliencyResiliencyResponse:
+    type: object
+    properties:
+      dummy_string:
+        type: string
   rpcStatus:
     type: object
     properties:
